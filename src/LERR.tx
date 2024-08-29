@@ -1,0 +1,6 @@
+1.- Insertar en la consola los siguientes comandos de manera independiente:
+cd src
+npm install
+npm install boostrap
+ng serve
+2.- Utilizar el formulario 
