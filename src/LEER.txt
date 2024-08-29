@@ -1,8 +1,8 @@
 1.-Instalar Visual Studio Code
 2.-Instalar NodeJS desde la pagina oficial
 1.-Insertar en la consola los siguientes comandos de manera independiente:
-npm install -g @angular/cli
 npm install
+npm install -g @angular/cli
 npm install boostrap
 cd src
 ng serve
