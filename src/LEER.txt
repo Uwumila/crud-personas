@@ -2,8 +2,8 @@
 2.-Instalar NodeJS desde la pagina oficial
 1.-Insertar en la consola los siguientes comandos de manera independiente:
 npm install -g @angular/cli
-cd src
 npm install
 npm install boostrap
+cd src
 ng serve
 2.- Utilizar el formulario 
