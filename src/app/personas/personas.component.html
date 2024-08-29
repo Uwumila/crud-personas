@@ -1,0 +1,121 @@
+<div class="background-container">
+  <div class="card">
+    <h2 class="card-title text-center mb-4">Personas registradas</h2>
+    <ul class="list-group mb-4">
+      <li class="list-group-item" *ngFor="let persona of personas" (click)="selectPersona(persona)">
+        {{ persona.nombre }} {{ persona.apellido }}
+      </li>
+    </ul>
+
+    <div *ngIf="selectedPersona" class="mb-4">
+      <h3 class="card-title">Editar Usuario</h3>
+      <form #editForm="ngForm" (ngSubmit)="updatePersona()" novalidate>
+        <div class="mb-3">
+          <label for="nombre" class="form-label">Nombre</label>
+          <input [(ngModel)]="selectedPersona.nombre" id="nombre" name="nombre" class="form-control" required
+            minlength="2" placeholder="Nombre" #nombre="ngModel">
+          <div *ngIf="nombre.invalid && (nombre.dirty || nombre.touched)" class="text-danger">
+            <small *ngIf="nombre.errors?.['required']">El nombre es obligatorio.</small>
+            <small *ngIf="nombre.errors?.['minlength']">El nombre debe tener al menos 2 caracteres.</small>
+          </div>
+        </div>
+
+        <div class="mb-3">
+          <label for="apellido" class="form-label">Apellido</label>
+          <input [(ngModel)]="selectedPersona.apellido" id="apellido" name="apellido" class="form-control" required
+            minlength="2" placeholder="Apellido" #apellido="ngModel">
+          <div *ngIf="apellido.invalid && (apellido.dirty || apellido.touched)" class="text-danger">
+            <small *ngIf="apellido.errors?.['required']">El apellido es obligatorio.</small>
+            <small *ngIf="apellido.errors?.['minlength']">El apellido debe tener al menos 2 caracteres.</small>
+          </div>
+        </div>
+
+        <div class="mb-3">
+          <label for="rut" class="form-label">RUT</label>
+          <input [(ngModel)]="selectedPersona.rut" id="rut" name="rut" class="form-control" required placeholder="RUT"
+            #rut="ngModel">
+          <div *ngIf="rut.invalid && (rut.dirty || rut.touched)" class="text-danger">
+            <small *ngIf="rut.errors?.['required']">El RUT es obligatorio.</small>
+          </div>
+        </div>
+
+        <div class="mb-3">
+          <label for="telefono" class="form-label">Teléfono</label>
+          <input [(ngModel)]="selectedPersona.telefono" id="telefono" name="telefono" class="form-control" required
+            placeholder="Teléfono" #telefono="ngModel">
+          <div *ngIf="telefono.invalid && (telefono.dirty || telefono.touched)" class="text-danger">
+            <small *ngIf="telefono.errors?.['required']">El teléfono es obligatorio.</small>
+          </div>
+        </div>
+
+        <div class="mb-3">
+          <label for="correo" class="form-label">Correo</label>
+          <input [(ngModel)]="selectedPersona.correo" id="correo" name="correo" class="form-control" required
+            placeholder="Correo" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$" #correo="ngModel">
+          <div *ngIf="correo.invalid && (correo.dirty || correo.touched)" class="text-danger">
+            <small *ngIf="correo.errors?.['required']">El correo es obligatorio.</small>
+            <small *ngIf="correo.errors?.['pattern']">El correo no es válido.</small>
+          </div>
+        </div>
+
+        <button type="submit" class="btn btn-primary me-2" [disabled]="editForm.invalid">Guardar</button>
+        <button type="button" class="btn btn-danger" (click)="deletePersona(selectedPersona.id!)">Eliminar</button>
+      </form>
+    </div>
+
+    <div>
+      <h3 class="card-title">Agregar Persona</h3>
+      <form #addForm="ngForm" (ngSubmit)="addPersona()" novalidate>
+        <div class="mb-3">
+          <label for="newNombre" class="form-label">Nombre</label>
+          <input [(ngModel)]="newPersona.nombre" id="newNombre" name="nombre" class="form-control" required
+            minlength="2" placeholder="Nombre" #newNombre="ngModel">
+          <div *ngIf="newNombre.invalid && (newNombre.dirty || newNombre.touched)" class="text-danger">
+            <small *ngIf="newNombre.errors?.['required']">El nombre es obligatorio.</small>
+            <small *ngIf="newNombre.errors?.['minlength']">El nombre debe tener al menos 2 caracteres.</small>
+          </div>
+        </div>
+
+        <div class="mb-3">
+          <label for="newApellido" class="form-label">Apellido</label>
+          <input [(ngModel)]="newPersona.apellido" id="newApellido" name="apellido" class="form-control" required
+            minlength="2" placeholder="Apellido" #newApellido="ngModel">
+          <div *ngIf="newApellido.invalid && (newApellido.dirty || newApellido.touched)" class="text-danger">
+            <small *ngIf="newApellido.errors?.['required']">El apellido es obligatorio.</small>
+            <small *ngIf="newApellido.errors?.['minlength']">El apellido debe tener al menos 2 caracteres.</small>
+          </div>
+        </div>
+
+        <div class="mb-3">
+          <label for="newRut" class="form-label">RUT</label>
+          <input [(ngModel)]="newPersona.rut" id="newRut" name="rut" class="form-control" required placeholder="RUT"
+            #newRut="ngModel">
+          <div *ngIf="newRut.invalid && (newRut.dirty || newRut.touched)" class="text-danger">
+            <small *ngIf="newRut.errors?.['required']">El RUT es obligatorio.</small>
+          </div>
+        </div>
+
+        <div class="mb-3">
+          <label for="newTelefono" class="form-label">Teléfono</label>
+          <input [(ngModel)]="newPersona.telefono" id="newTelefono" name="telefono" class="form-control" required
+            placeholder="Teléfono" #newTelefono="ngModel">
+          <div *ngIf="newTelefono.invalid && (newTelefono.dirty || newTelefono.touched)" class="text-danger">
+            <small *ngIf="newTelefono.errors?.['required']">El teléfono es obligatorio.</small>
+          </div>
+        </div>
+
+        <div class="mb-3">
+          <label for="newCorreo" class="form-label">Correo</label>
+          <input [(ngModel)]="newPersona.correo" id="newCorreo" name="correo" class="form-control" required
+            placeholder="Correo" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$" #newCorreo="ngModel">
+          <div *ngIf="newCorreo.invalid && (newCorreo.dirty || newCorreo.touched)" class="text-danger">
+            <small *ngIf="newCorreo.errors?.['required']">El correo es obligatorio.</small>
+            <small *ngIf="newCorreo.errors?.['pattern']">El correo no es válido.</small>
+          </div>
+        </div>
+
+        <button type="submit" class="btn btn-success" [disabled]="addForm.invalid">Agregar</button>
+      </form>
+    </div>
+  </div>
+</div>
